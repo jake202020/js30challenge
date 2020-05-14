@@ -66,6 +66,11 @@
     canvas.addEventListener('touchend', () => isDrawing = false);
 
     canvas.addEventListener('mouseout', () => isDrawing = false);
+    // touchmove handler
+function process_touchmove(ev) {
+  // Call preventDefault() to prevent any further handling
+  ev.preventDefault();
+}
 
 </script>
 
