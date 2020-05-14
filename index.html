@@ -50,27 +50,26 @@
         }
     }
 
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('touchmove', draw);
+    if ('ontouchstart' in window) {
+/* browser with Touch Events support */
+canvas.addEventListener('touchmove', draw);
+canvas.addEventListener('touchstart', (e) => {
+        isDrawing = true;
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+    canvas.addEventListener('touchend', () => isDrawing = false);
+}
 
+
+    canvas.addEventListener('mousemove', draw);
+    
     canvas.addEventListener('mousedown', (e) => {
         isDrawing = true;
         [lastX, lastY] = [e.offsetX, e.offsetY];
     });
-    canvas.addEventListener('touchstart', (e) => {
-        isDrawing = true;
-        [lastX, lastY] = [e.offsetX, e.offsetY];
-    });
-
+    
     canvas.addEventListener('mouseup', () => isDrawing = false);
-    canvas.addEventListener('touchend', () => isDrawing = false);
-
     canvas.addEventListener('mouseout', () => isDrawing = false);
-    // touchmove handler
-function process_touchmove(ev) {
-  // Call preventDefault() to prevent any further handling
-  ev.preventDefault();
-}
 
 </script>
 
